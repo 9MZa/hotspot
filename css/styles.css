@@ -1,0 +1,12 @@
+/* html {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  width: 100vw;
+  height: 100vh;
+} */
+
+html {
+  background-image: url("../images/bg.jpeg");
+  width: 100vw;
+  height: 100vh;
+  background-attachment: fixed;
+}
