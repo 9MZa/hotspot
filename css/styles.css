@@ -10,3 +10,9 @@ html {
   height: 100vh;
   background-attachment: fixed;
 }
+
+p,
+input,
+button {
+  font-family: Arial, Helvetica, sans-serif;
+}
