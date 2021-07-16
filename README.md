@@ -2,4 +2,4 @@
 
 ## Login page
 
-![Login page](./img/screenshot.png)
+![Login page](./img/screenshot.jpg)
