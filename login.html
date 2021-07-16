@@ -1,138 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="pragma" content="no-cache" />
-    <meta http-equiv="expires" content="-1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>.Net Cafe Internet hotspot - Log in</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
-    <style>
-      p,
-      input,
-      button {
-        font-family: Arial, Helvetica, sans-serif;
-      }
 
-      body {
-        background-image: url("./img/bg.jpeg");
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="expires" content="-1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>.Net Cafe Internet hotspot - Log in</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <style>
+    p,
+    input,
+    button {
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-  <body>
-    $(if chap-id)
-    <form
-      name="sendin"
-      action="$(link-login-only)"
-      method="post"
-      style="display: none"
-    >
-      <input type="hidden" name="username" />
-      <input type="hidden" name="password" />
-      <input type="hidden" name="dst" value="$(link-orig)" />
-      <input type="hidden" name="popup" value="true" />
-    </form>
+    body {
+      background-image: url("./img/bg.jpeg");
+    }
+  </style>
+</head>
 
-    <script src="/md5.js"></script>
-    <script>
-      function doLogin() {
-        document.sendin.username.value = document.login.username.value;
-        document.sendin.password.value = hexMD5(
-          "$(chap-id)" + document.login.password.value + "$(chap-challenge)"
-        );
-        document.sendin.submit();
-        return false;
-      }
-    </script>
-    $(endif)
-    <section class="hero is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <div
-            class="
+<body>
+  $(if chap-id)
+  <form name="sendin" action="$(link-login-only)" method="post" style="display: none">
+    <input type="hidden" name="username" />
+    <input type="hidden" name="password" />
+    <input type="hidden" name="dst" value="$(link-orig)" />
+    <input type="hidden" name="popup" value="true" />
+  </form>
+
+  <script src="/md5.js"></script>
+  <script>
+    function doLogin() {
+      document.sendin.username.value = document.login.username.value;
+      document.sendin.password.value = hexMD5(
+        "$(chap-id)" + document.login.password.value + "$(chap-challenge)"
+      );
+      document.sendin.submit();
+      return false;
+    }
+  </script>
+  $(endif)
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="
               column
               is-full-mobile is-full-tablet is-6-desktop is-offset-3-desktop
               box
-            "
-          >
-            <div class="columns is-flex is-centered my-6">
-              <span class="icon has-text-link">
-                <i class="fas fa-5x fa-wifi"></i>
-              </span>
-            </div>
+            ">
+          <div class="columns is-flex is-centered my-6">
+            <span class="icon has-text-link">
+              <i class="fas fa-5x fa-wifi"></i>
+            </span>
+          </div>
 
-            <hr class="login-hr" />
-            <div class="columns is-flex is-centered">
-              <p class="subtitle has-text-dark is-size-6 has-text-centered">
-                $(if error == "")Please log in to use the internet hotspot
-                service $(if trial == 'yes')<br />Free trial available,
-                <a
-                  href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)"
-                  >click here</a
-                >.$(endif) $(endif) $(if error)$(error)$(endif)
+          <hr class="login-hr" />
+          <div class="columns is-flex is-centered">
+            <p class="subtitle has-text-dark is-size-6 has-text-centered">
+              $(if error == "")Please log in to use the internet hotspot
+              service $(if trial == 'yes')<br />Free trial available,
+              <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">click here</a>.$(endif)
+              $(endif) $(if error)$(error)$(endif)
+            </p>
+          </div>
+          <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()"
+            $(endif)>
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input is-large" name="username" type="text" value="$(username)" placeholder="Username" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
               </p>
             </div>
-            <form
-              name="login"
-              action="$(link-login-only)"
-              method="post"
-              $(if
-              chap-id)
-              onSubmit="return doLogin()"
-              $(endif)
-            >
-              <input type="hidden" name="dst" value="$(link-orig)" />
-              <input type="hidden" name="popup" value="true" />
-              <div class="field">
-                <p class="control has-icons-left">
-                  <input
-                    class="input is-large"
-                    name="username"
-                    type="text"
-                    value="$(username)"
-                    placeholder="Username"
-                  />
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
-                  </span>
-                </p>
-              </div>
 
-              <div class="field">
-                <p class="control has-icons-left">
-                  <input
-                    class="input is-large"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                  />
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                  </span>
-                </p>
-              </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input is-large" name="password" type="password" placeholder="Password" />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
 
-              <button
-                type="submit"
-                value="Connect"
-                class="button is-block is-link is-large is-fullwidth"
-              >
-                Login <i class="fa fa-sign-in" aria-hidden="true"></i>
-              </button>
-            </form>
-          </div>
+            <button type="submit" value="Connect" class="button is-block is-link is-large is-fullwidth">
+              Login <i class="fa fa-sign-in" aria-hidden="true"></i>
+            </button>
+          </form>
         </div>
       </div>
-    </section>
-  </body>
+    </div>
+  </section>
+</body>
+
 </html>
